@@ -53,8 +53,6 @@ flowchart LR
   DLQ --> Alarm["CloudWatch alarm"]
 ```
 
-The containers stack is still included for an advanced version, especially if you want the article to lean into your AWS Containers community angle. It is more expensive to leave running, so treat it as optional unless you specifically want to show ECS.
-
 ## Local Preview
 
 Install dependencies:
