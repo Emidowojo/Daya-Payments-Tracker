@@ -1,0 +1,40 @@
+{
+  "name": "daya-payment-tracker",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Daya payment collection and webhook reconciliation app with AWS deployment options.",
+  "scripts": {
+    "dev": "npm run dev:api",
+    "dev:api": "tsx apps/api/src/server.ts",
+    "dev:worker": "tsx apps/worker/src/worker.ts",
+    "dev:worker:once": "WORKER_ONCE=true tsx apps/worker/src/worker.ts",
+    "build": "tsc -p tsconfig.json",
+    "start:api": "node dist/apps/api/src/server.js",
+    "start:worker": "node dist/apps/worker/src/worker.js",
+    "simulate:webhook": "tsx scripts/send-signed-webhook.ts",
+    "smoke": "npm run build && node dist/scripts/smoke-test.js",
+    "smoke:dev": "tsx scripts/smoke-test.ts",
+    "cdk": "cdk",
+    "cdk:serverless:synth": "npm run build && cdk synth --app \"node dist/infra/serverless-app.js\"",
+    "cdk:serverless:deploy": "npm run build && cdk deploy --app \"node dist/infra/serverless-app.js\"",
+    "cdk:containers:synth": "npm run build && cdk synth --app \"node dist/infra/app.js\"",
+    "cdk:containers:deploy": "npm run build && cdk deploy --app \"node dist/infra/app.js\""
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.600.0",
+    "@aws-sdk/client-sqs": "^3.600.0",
+    "@aws-sdk/lib-dynamodb": "^3.600.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.10",
+    "aws-cdk": "^2.148.0",
+    "aws-cdk-lib": "^2.148.0",
+    "constructs": "^10.3.0",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.3"
+  }
+}

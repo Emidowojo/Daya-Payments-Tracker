@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Payment Tracker</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <h1>Receive and Track Payments</h1>
+        </div>
+      </header>
+
+      <section class="metrics" aria-label="Payment summary">
+        <article>
+          <span>Payment accounts</span>
+          <strong id="fundingAccountCount">0</strong>
+        </article>
+        <article>
+          <span>Payments</span>
+          <strong id="depositCount">0</strong>
+        </article>
+        <article>
+          <span>Updates</span>
+          <strong id="webhookCount">0</strong>
+        </article>
+        <article>
+          <span>Completed</span>
+          <strong id="processedCount">0</strong>
+        </article>
+      </section>
+
+      <section class="workspace">
+        <aside class="control-panel">
+          <div class="panel-head">
+            <h2>Actions</h2>
+            <button id="refreshBtn" type="button" class="secondary">Refresh</button>
+          </div>
+
+          <form id="ngnForm" class="stack">
+            <h3>Create bank details</h3>
+            <label>
+              Customer reference
+              <input name="customer_id" value="customer_001" autocomplete="off" />
+            </label>
+            <label>
+              Expected amount
+              <input name="amount" type="number" min="1" step="1" value="50000" />
+            </label>
+            <button type="submit">Create bank details</button>
+          </form>
+
+          <form id="cryptoForm" class="stack">
+            <h3>Create crypto address</h3>
+            <label>
+              Customer reference
+              <input name="customer_id" value="customer_002" autocomplete="off" />
+            </label>
+            <div class="field-grid">
+              <label>
+                Asset
+                <select name="asset">
+                  <option value="USDC">USDC</option>
+                  <option value="USDT">USDT</option>
+                </select>
+              </label>
+              <label>
+                Chain
+                <input name="chain" value="BASE" autocomplete="off" />
+              </label>
+            </div>
+            <button type="submit">Create crypto address</button>
+          </form>
+
+          <form id="depositForm" class="stack">
+            <h3>Send test payment</h3>
+            <label>
+              Payment account
+              <select id="fundingAccountSelect" name="funding_account_id"></select>
+            </label>
+            <label>
+              Amount
+              <input name="amount" value="50000.00" autocomplete="off" />
+            </label>
+            <button type="submit">Send test payment</button>
+          </form>
+
+          <div class="button-row">
+            <button id="processBtn" type="button">Confirm payment</button>
+            <button id="resetBtn" type="button" class="danger">Clear</button>
+          </div>
+        </aside>
+
+        <section class="data-panel">
+          <div class="panel-head">
+            <h2>Activity</h2>
+            <span id="lastAction" class="quiet">No activity yet</span>
+          </div>
+
+          <div class="table-wrap">
+            <h3>Payment accounts</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Type</th>
+                  <th>Customer</th>
+                  <th>Status</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody id="fundingAccountsTable"></tbody>
+            </table>
+          </div>
+
+          <div class="table-wrap">
+            <h3>Payments</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Payment account</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Result</th>
+                </tr>
+              </thead>
+              <tbody id="depositsTable"></tbody>
+            </table>
+          </div>
+
+          <div class="event-grid">
+            <div class="table-wrap">
+              <h3>Updates</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Event</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="webhooksTable"></tbody>
+              </table>
+            </div>
+            <div class="json-box">
+              <h3>Records</h3>
+              <pre id="stateJson">{}</pre>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

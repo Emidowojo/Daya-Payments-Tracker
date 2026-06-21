@@ -1,0 +1,8 @@
+node_modules/
+dist/
+cdk.out/
+data/
+.npm-cache/
+.env
+.DS_Store
+*.log
