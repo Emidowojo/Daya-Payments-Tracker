@@ -15,6 +15,8 @@ This project is shaped for developer education. A non-technical viewer can under
 - Low-cost AWS serverless deployment with Lambda, SQS, DynamoDB, Secrets Manager, and CloudWatch
 - Optional AWS containers deployment with ECS Fargate, ALB, SQS, DynamoDB, Secrets Manager, and CloudWatch
 
+The serverless deployment uses safe Daya mock mode by default so the public app can be shared without exposing a real Daya sandbox API key. For private sandbox testing, set `DAYA_MOCK_MODE` to `false` in [infra/serverless-app.ts](infra/serverless-app.ts), update the AWS secrets, and redeploy.
+
 ## Why Daya Matters Here
 
 Daya is the product layer:
@@ -99,6 +101,8 @@ Recommended low-cost path:
 npm run cdk:serverless:synth
 npm run cdk:serverless:deploy
 ```
+
+This public deployment is safe to share because it runs in mock mode by default. The code still includes the real Daya client and webhook verification flow for teams that want to connect a private Daya sandbox.
 
 Optional containers path:
 

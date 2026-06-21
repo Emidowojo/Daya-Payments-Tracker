@@ -9,13 +9,15 @@ Use the serverless path first if you want something affordable and easy to publi
 - Node.js 20 or newer
 - AWS CLI configured with an AWS account
 - AWS CDK bootstrap completed for your target account and region
-- Daya sandbox API key
-- Daya webhook signing secret
+- Daya sandbox API key, only if you want private real-sandbox testing
+- Daya webhook signing secret, only if you want private real-sandbox testing
 - Docker only if you choose the ECS containers path
 
 ## Option A: Serverless Deployment
 
 This is the recommended path for a public walkthrough because it avoids a VPC, NAT gateways, an Application Load Balancer, and always-on Fargate tasks.
+
+By default, this stack deploys with `DAYA_MOCK_MODE=true`. That makes the public app safe to share because it does not expose a live Daya sandbox API key behind unauthenticated buttons.
 
 The stack creates:
 
@@ -50,9 +52,11 @@ After deploy, copy these outputs:
 - `WebhookQueueUrl`
 - `WebhookDeadLetterQueueUrl`
 
-### 3. Update Secrets
+### 3. Optional: Connect a Private Daya Sandbox
 
-Replace the generated secret values with your Daya sandbox values.
+Skip this section for a public article link. Use it only when you want to test privately against Daya sandbox.
+
+First, set `DAYA_MOCK_MODE` to `false` in `infra/serverless-app.ts`, then replace the generated secret values with your Daya sandbox values.
 
 ```bash
 aws secretsmanager put-secret-value \
@@ -72,9 +76,9 @@ The Lambda functions read these values through CloudFormation dynamic references
 npm run cdk:serverless:deploy
 ```
 
-### 4. Configure Daya Webhook URL
+### 4. Optional: Configure Daya Webhook URL
 
-Use the `DayaWebhookUrl` stack output as your Daya sandbox webhook endpoint.
+If you enabled real sandbox mode, use the `DayaWebhookUrl` stack output as your Daya sandbox webhook endpoint.
 
 It will look like this:
 

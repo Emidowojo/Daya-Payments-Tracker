@@ -53,10 +53,15 @@ export class SqsQueue implements QueueClient {
   }
 
   async reset(): Promise<void> {
-    await this.client.send(
-      new PurgeQueueCommand({
-        QueueUrl: this.queueUrl
-      })
-    );
+    try {
+      await this.client.send(
+        new PurgeQueueCommand({
+          QueueUrl: this.queueUrl
+        })
+      );
+    } catch (error) {
+      if (error instanceof Error && error.name === "PurgeQueueInProgress") return;
+      throw error;
+    }
   }
 }

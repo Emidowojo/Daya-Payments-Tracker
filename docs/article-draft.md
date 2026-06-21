@@ -157,6 +157,8 @@ After deploy, configure the `DayaWebhookUrl` stack output in your Daya sandbox w
 
 The stack outputs the app URL, webhook URL, queue URLs, and secret names.
 
+For a public article link, I recommend deploying the app in safe mock mode. The repository still includes the real Daya client and signed webhook flow, but the public URL should not put a real Daya sandbox API key behind unauthenticated buttons. For private testing, you can turn mock mode off, update the AWS secrets, and redeploy.
+
 ## What About Containers?
 
 Because I am also in the AWS Containers community, I kept an ECS Fargate version in the project too.

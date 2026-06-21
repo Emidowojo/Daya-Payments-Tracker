@@ -1,6 +1,7 @@
 node_modules/
 dist/
 cdk.out/
+cdk.context.json
 data/
 .npm-cache/
 .env

@@ -51,7 +51,7 @@ class DayaPaymentTrackerServerlessStack extends cdk.Stack {
       STATE_TABLE_NAME: table.tableName,
       SQS_QUEUE_URL: webhookQueue.queueUrl,
       DAYA_BASE_URL: "https://api.sandbox.daya.co",
-      DAYA_MOCK_MODE: "false",
+      DAYA_MOCK_MODE: "true",
       DAYA_REQUIRE_WEBHOOK_SIGNATURE: "true",
       ALLOW_APP_ACTIONS: "true",
       ALLOW_RESET: "true",
@@ -120,6 +120,7 @@ class DayaPaymentTrackerServerlessStack extends cdk.Stack {
 
     webhookQueue.grantSendMessages(apiFunction);
     webhookQueue.grantConsumeMessages(apiFunction);
+    webhookQueue.grantPurge(apiFunction);
     webhookQueue.grantConsumeMessages(workerFunction);
     table.grantReadWriteData(apiFunction);
     table.grantReadWriteData(workerFunction);
@@ -162,6 +163,6 @@ const app = new cdk.App();
 new DayaPaymentTrackerServerlessStack(app, "DayaPaymentTrackerServerlessStack", {
   env: {
     account: process.env.CDK_DEFAULT_ACCOUNT,
-    region: process.env.CDK_DEFAULT_REGION ?? "us-east-1"
+    region: process.env.CDK_DEFAULT_REGION ?? "eu-north-1"
   }
 });
