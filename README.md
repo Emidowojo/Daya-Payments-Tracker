@@ -1,6 +1,6 @@
 # Daya Payment Tracker
 
-Build a small payment collection app that uses Daya to create payment details, receive payment webhooks, and reconcile deposits. AWS provides the reliable delivery layer around it: webhook receipt, queueing, background processing, storage, secrets, logs, and alerts.
+A small payments collection app that uses the Daya API to create payment details, receive payment webhooks, and reconcile deposits. AWS provides the reliable delivery layer around it: webhook receipt, queueing, background processing, storage, secrets, logs, and alerts.
 
 This project is shaped for developer education. A non-technical viewer can understand the app as "create payment details, receive money, confirm the payment", while a developer can inspect the Daya API calls and the AWS architecture behind the flow.
 
@@ -123,9 +123,3 @@ See [docs/aws-deployment-guide.md](docs/aws-deployment-guide.md) for the full ch
 This project focuses on Daya Business API funding accounts. That is the right model when you want to show how a business can collect NGN or stablecoins from customers and reconcile deposits.
 
 Daya Pro has a separate API surface for trading, account balances, orders, withdrawals, and Pro account-level crypto deposit addresses. Keep those concepts separate unless the product flow intentionally connects Business API collections to Pro trading.
-
-## Article Draft
-
-The publishable article draft is here:
-
-[docs/article-draft.md](docs/article-draft.md)
